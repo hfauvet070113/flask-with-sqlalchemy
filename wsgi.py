@@ -3,6 +3,8 @@ import logging
 # logging.warn(os.environ["DUMMY"])
 
 from flask import Flask, request, render_template
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,6 +16,17 @@ ma = Marshmallow(app)
 
 from models import Product
 from schemas import products_schema, product_schema
+
+
+class Productview(ModelView):
+    can_view_details = True
+    can_create = False
+    can_edit = False
+    can_delete = False
+    page_size = 50
+
+admin = Admin(app, name='Back-office', template_mode='bootstrap3')
+admin.add_view(Productview(Product, db.session)) # `Product` needs to be imported before
 
 @app.route('/hello')
 def hello():
