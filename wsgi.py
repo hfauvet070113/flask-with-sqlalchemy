@@ -2,7 +2,7 @@ import os
 import logging
 # logging.warn(os.environ["DUMMY"])
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -22,7 +22,8 @@ def hello():
 @app.route('/products')
 def products():
     products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
-    return products_schema.jsonify(products)
+    #return products_schema.jsonify(products)
+    return render_template('home.html', products=products)
 
 @app.route('/products', methods=['POST'])
 def add_product():

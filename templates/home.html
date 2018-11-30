@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Products</h1>
+
+  <ul class="list-unstyled">
+    {% for product in products %}
+      <li>{{ product.name }}  <a href="/products/{{product.id}}"><button type="button" class="btn btn-info">Detail</button></a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
