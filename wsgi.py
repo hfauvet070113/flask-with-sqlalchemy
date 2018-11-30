@@ -52,7 +52,8 @@ def get_product(id):
     product = db.session.query(Product).get(id)
     if not product:
         return 'Product does not exist', 404
-    return product_schema.jsonify(product)
+    # return product_schema.jsonify(product)
+    return render_template('product_detail.html', product=product)
 
 @app.route('/products/<int:id>', methods=['PATCH'])
 def update_product(id):

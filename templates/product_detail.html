@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Product detail for {{product.name}}</h1>
+
+  <ul class="list-unstyled">
+      <li>{{ product.name }}  {{product.description}}</li>
+  </ul>
+{% endblock %}
